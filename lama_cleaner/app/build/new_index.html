@@ -10,12 +10,17 @@
     <div>
         <h1>Image</h1>
         <form method="POST" enctype="multipart/form-data" action="">
-            <label for="image">image</label>
+            <div style="width: 50vw;">
+            <label for="image">image :</label>
             
-            <input type="file"  alt="Image" name="image" style="float:right" width="48" height="48">
-            <label for="paintByExampleImage">paintByExampleImage</label>
-            <input type="file"  alt="Image" name="paintByExampleImage" style="float:right" width="48" height="48">
-
+                <input type="file"  alt="Image" name="image" style="float:right" width="48" height="48">
+            </div>
+            <br>
+            <div style="width: 50vw;">
+                <label for="paintByExampleImage">paintByExampleImage :</label>
+                <input type="file"  alt="Image" name="paintByExampleImage" style="float:right" width="48" height="48">
+            </div>
+            <br>
             <button type="submit">submit</button>
         </form>
     </div>

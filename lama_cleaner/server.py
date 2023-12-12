@@ -77,7 +77,7 @@ import numpy as np
 import cv2
 from typing import List
 import os
-HOME = os.path.join(os.getcwd(),'face_parsing_lama')
+HOME = os.path.join(os.getcwd(),'clothes_paint')
 print("HOME:", HOME)
 SOURCE_IMAGE_PATH = f"{HOME}/Grounded-Segment-Anything/1.png"
 CLASSES = ['cloth','legs']
@@ -93,16 +93,16 @@ def enhance_class_name(class_names: List[str]) -> List[str]:
 
 import os
 
-GROUNDING_DINO_CONFIG_PATH =  "/content/face_parsing_lama/GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py"
+GROUNDING_DINO_CONFIG_PATH =  "/content/clothes_paint/GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py"
 print(GROUNDING_DINO_CONFIG_PATH, "; exist:", os.path.isfile(GROUNDING_DINO_CONFIG_PATH))
 
 import os
 
-GROUNDING_DINO_CHECKPOINT_PATH = "/content/face_parsing_lama/weights/groundingdino_swint_ogc.pth"
+GROUNDING_DINO_CHECKPOINT_PATH = "/content/clothes_paint/weights/groundingdino_swint_ogc.pth"
 print(GROUNDING_DINO_CHECKPOINT_PATH, "; exist:", os.path.isfile(GROUNDING_DINO_CHECKPOINT_PATH))
 import os
 
-SAM_CHECKPOINT_PATH = "/content/face_parsing_lama/weights/sam_vit_h_4b8939.pth"
+SAM_CHECKPOINT_PATH = "/content/clothes_paint/weights/sam_vit_h_4b8939.pth"
 print(SAM_CHECKPOINT_PATH, "; exist:", os.path.isfile(SAM_CHECKPOINT_PATH))
 import torch
 
@@ -119,7 +119,7 @@ from segment_anything import sam_model_registry, SamPredictor
 sam = sam_model_registry[SAM_ENCODER_VERSION](checkpoint=SAM_CHECKPOINT_PATH).to(device=DEVICE)
 sam_predictor = SamPredictor(sam)
 import torchvision.transforms as transforms
-sys.path.append('/content/face_parsing_lama/Grounded-Segment-Anything/face_parsing_PyTorch/')
+sys.path.append('/content/clothes_paint/Grounded-Segment-Anything/face_parsing_PyTorch/')
 # %cd face_parsing_PyTorch
 from model import BiSeNet
 # %cd ..
@@ -127,7 +127,7 @@ n_classes = 19
 net = BiSeNet(n_classes=n_classes)
 device = torch.device('cuda:0')
 net.to(device)
-ckpt_path = '/content/face_parsing_lama/Grounded-Segment-Anything/79999_iter.pth'
+ckpt_path = '/content/clothes_paint/Grounded-Segment-Anything/79999_iter.pth'
 net.load_state_dict(torch.load(ckpt_path))
 net.eval()
 
@@ -136,10 +136,10 @@ to_tensor = transforms.Compose([
         transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     ])
 model_type = "vit_t"
-sam_checkpoint = "/content/face_parsing_lama/Grounded-Segment-Anything/MobileSAM/weights/mobile_sam.pt"
-sys.path.append('/content/face_parsing_lama/Grounded-Segment-Anything/')
+sam_checkpoint = "/content/clothes_paint/Grounded-Segment-Anything/MobileSAM/weights/mobile_sam.pt"
+sys.path.append('/content/clothes_paint/Grounded-Segment-Anything/')
 
-sys.path.append('/content/face_parsing_lama/Grounded-Segment-Anything/MobileSAM/')
+sys.path.append('/content/clothes_paint/Grounded-Segment-Anything/MobileSAM/')
 from mobile_sam import sam_model_registry, SamAutomaticMaskGenerator, SamPredictor
 mobile_sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 # mobile_sam.to(device=device)

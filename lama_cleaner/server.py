@@ -80,7 +80,7 @@ import os
 HOME = os.path.join(os.getcwd(),'face_parsing_lama')
 print("HOME:", HOME)
 SOURCE_IMAGE_PATH = f"{HOME}/Grounded-Segment-Anything/1.png"
-CLASSES = ['face','neck','glasses','hat','hair','beard','earrings','ears']
+CLASSES = ['cloth','legs']
 # CLASSES = ['arms']
 BOX_TRESHOLD = 0.35
 TEXT_TRESHOLD = 0.25
